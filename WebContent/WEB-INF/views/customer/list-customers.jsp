@@ -1,11 +1,13 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8"/>
 	<title>List Customer</title>
 	
-	<link type="text/css" rel="stylesheet" href="${PageContext.request.contextPath}/resources/css/style.css" />
+	<link type="text/css" 
+		  rel="stylesheet" 
+		  href="${pageContext.request.contextPath}/resources/css/style.css" />
 </head>
 <body>
 	<div id="wrapper">
@@ -16,6 +18,11 @@
 	
 	<div id="container">
 		<div id="content">
+			<!-- showFormForAdd is a relative path -->
+			<input type="button" value="Add Customer" 
+					onclick="window.location.href='showFormForAdd'; return false;"
+					class="add-button"
+			/>
 			<!-- add html table -->
 			<table>
 				<tr>
@@ -23,13 +30,13 @@
 					<th>Last Name</th>
 					<th>Email</th>
 				</tr>
-				<c:foreach var="customer" items="${customers}">
+				<c:forEach var="customer" items="${customers}">
 					<tr>
 						<td>${customer.firstName}</td>
 						<td>${customer.lastName}</td>
 						<td>${customer.email}</td>
 					</tr>
-				</c:foreach>
+				</c:forEach>
 			</table>
 		</div>
 	</div>

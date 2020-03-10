@@ -19,7 +19,6 @@ public class CustomerDAOImpl implements CustomerDAO
 	private SessionFactory factory;
 
 	@Override
-	@Transactional
 	public List<Customer> getCustomers()
 	{
 		// get a session object;
