@@ -1,5 +1,6 @@
 package com.jsmile.springhibernate.customer;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +22,19 @@ public class CustomerServiceImpl implements CustomerService
 		return customerDAO.getCustomers();
 	}
 
+	@Override
+	@Transactional
+	public boolean saveCustomer( Customer _customer )
+	{
+		return customerDAO.saveCustomer( _customer );		
+	}
+
+	@Override
+	@Transactional
+	public Customer getCustomer( int _customerId )
+	{
+		return customerDAO.getCustomer( _customerId );
+	}
+	
+	
 }
