@@ -62,5 +62,63 @@ public class CustomerDAOImpl implements CustomerDAO
 		return session.get( Customer.class, _customerId );
 	}
 
+	@Override
+	public boolean deleteCustomer( int _id )
+	{
+		boolean success = true;
+		
+		try 
+		{
+			Session session = factory.getCurrentSession();
+			
+			Query query = session.createQuery( 
+											"DELETE FROM Customer"
+											+ " WHERE id=:customerId" );
+			query.setParameter( "customerId", _id );
+			query.executeUpdate();
+		} 
+		catch ( HibernateException e ) 
+		{
+			success = false;
+			System.out.println( "/nDeletion Failed." );
+		}
+		
+		return success;
+	}
+
+	@Override
+	public List<Customer> searchName( String _searchName )
+	{
+		Session session = factory.getCurrentSession();
+		
+		Query query = null;
+		if( _searchName != null || _searchName.trim().length() > 0 ) 
+		{
+			System.out.println( "\nsearchName is : " + _searchName );
+/*
+			query = session.createQuery( 
+												"FROM Customer"
+												+ " WHERE lower(firstName) LIKE :theName"
+												+ " OR lower(lastName) LIKE :theName"
+												, Customer.class
+											);
+*/			
+			query = session.createQuery( "from Customer where lower(firstName) like :theName or lower(lastName) like :theName", Customer.class );
+			query.setParameter( "theName", "%" + _searchName.toLowerCase() + "%" );
+		}
+		else 
+		{
+			System.out.println( "\nsearchName is NULL !!" );
+			session = factory.getCurrentSession();
+			query = session.createQuery( "FROM Customer", Customer.class );
+		}
+		
+		List<Customer> customers = query.getResultList();
+		
+		return customers;
+	}
+	
+	
+
 	
 }

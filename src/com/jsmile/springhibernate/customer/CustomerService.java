@@ -13,4 +13,8 @@ public interface CustomerService
 
 	public Customer getCustomer( int _customerId );
 
+	public boolean deleteCustomer( int _id );
+
+	public List<Customer> searchName( String _searchName );
+
 }
