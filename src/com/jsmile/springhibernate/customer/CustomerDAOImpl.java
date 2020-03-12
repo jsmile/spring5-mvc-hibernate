@@ -103,6 +103,7 @@ public class CustomerDAOImpl implements CustomerDAO
 												+ " OR lower(lastName) LIKE :theName"
 												, Customer.class
 											);
+
 //			query = session.createQuery( "from Customer where lower(firstName) like :theName or lower(lastName) like :theName", Customer.class );
 			query.setParameter( "theName", "%" + _searchName.toLowerCase() + "%" );
 		}
