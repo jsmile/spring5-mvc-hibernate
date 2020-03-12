@@ -58,7 +58,31 @@ public class CustomerController
 		_model.addAttribute( "customer", customer );
 		
 		return "customer/customer-form";
-		
+	}
+	
+	@GetMapping( "/delete" )
+	public String deleteCustomer( @RequestParam( "customerId" ) int _id, Model _model ) 
+	{
+		boolean success = customerService.deleteCustomer( _id );
+		if( success ) 
+		{ 
+			System.out.println( "\nDeleted Successfully." );
+			return "redirect:/customer/list"; 
+		}
+		else 
+		{ 
+			System.out.println( "Deletion Failed." );
+			return "redirect:/customer/showFormForUpdate"; 
+		}
 	}
 
+	@GetMapping( "/search" )
+	public String searchName( @RequestParam( "searchName" ) String _searchName , Model _model ) 
+	{
+		List<Customer> customers = customerService.searchName( _searchName );
+		
+		_model.addAttribute( "customers", customers );
+		
+		return "customer/list-customers";
+	}
 }
